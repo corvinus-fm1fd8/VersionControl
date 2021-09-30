@@ -46,20 +46,18 @@ namespace UserMaintenance
             sfd.Filter = "Comma Seperated Values (*.csv)|*.csv";
             sfd.DefaultExt = "csv";
             sfd.AddExtension = true;
-            if (sfd.ShowDialog() != DialogResult.OK)
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+            
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.Default))
             {
-                using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.Default))
+                foreach (var u in users)
                 {
-                    foreach (var u in users)
-                    {
-                        sw.Write(u.ID);
-                        sw.Write(";");
-                        sw.Write(u.FullName);
-                    }
+                    sw.Write(u.ID);
+                    sw.Write(";");
+                    sw.Write(u.FullName);
+                    sw.WriteLine();
                 }
             }
-                
-                ;
 
         }
     }
