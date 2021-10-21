@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,35 @@ namespace VaR
         List<Tick> Ticks;
         PortfolioEntities context = new PortfolioEntities();
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        
+        
         public Form1()
         {
             InitializeComponent();
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.DefaultExt = "txt";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog()!=DialogResult.OK)
+            {
+                using (StreamWriter sw=new StreamWriter(sfd.FileName, false, Encoding.Default))
+                {
+                    string[] fejlec = new string[]
+                        {
+                            "Időszak",
+                            "Nyereség"
+                        };
+                    foreach (var item in Portfolio)
+                    {
+                        sw.Write(Portfolio.Count());
+                        sw.WriteLine(item.Index, item.Volume);
+                        
+                    }
+                }
+
+            }
+
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
@@ -63,5 +90,7 @@ namespace VaR
             }
             return value;
         }
+        
+        
     }
 }
