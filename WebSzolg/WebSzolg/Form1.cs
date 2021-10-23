@@ -17,23 +17,27 @@ namespace WebSzolg
     public partial class Form1 : Form
     {
         BindingList<RateData> rates = new BindingList<RateData>();
+        BindingList<string> currencies = new BindingList<string>();
         
         public Form1()
         {
             InitializeComponent();
-            fuggveny();
+            
+            RefreshData();
         
             dataGridView1.DataSource = rates.ToList();
             chartRateData.DataSource = rates;
+            comboBox1.DataSource = currencies.ToList();
         }
-        public void fuggveny()
+        public void RefreshData()
         {
+            rates.Clear();
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames="Eur",
-                startDate="2020-01-01",
-                endDate="2020-06-30"
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = dateTimePicker1.Value.ToString(),
+                endDate = dateTimePicker2.Value.ToString()
 
             };
             var response = mnbService.GetExchangeRates(request);
@@ -68,7 +72,19 @@ namespace WebSzolg
             chartArea.AxisY.IsStartedFromZero = false;
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }
