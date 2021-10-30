@@ -22,7 +22,7 @@ namespace WebSzolg
         public Form1()
         {
             InitializeComponent();
-            
+            GetCurrencies();
             RefreshData();
         
             dataGridView1.DataSource = rates.ToList();
@@ -85,6 +85,21 @@ namespace WebSzolg
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshData();
+        }
+        private void GetCurrencies()
+        {
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                string newitem = item.InnerText;
+                currencies.Add(newitem);
+            }
+            comboBox1.DataSource = currencies;
         }
     }
 }
