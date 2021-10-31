@@ -47,8 +47,14 @@ namespace jatekGyar
                 item.MoveBall();
                 if (item.Left>legjobbra)
                 {
-
+                    legjobbra = item.Left;
                 }
+            }
+            if (legjobbra>1000)
+            {
+                var elso = _balls[0];
+                _balls.Remove(elso);
+                mainPanel.Controls.Remove(elso);
             }
             
         }
