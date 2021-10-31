@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C63169F-03BA-4B5C-9F37-4ACE25A92FBF}</ProjectGuid>
+    <ProjectGuid>{D2E3DA0D-65D4-4F66-A78B-F3A89E43555D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>jatekGyar</RootNamespace>
     <AssemblyName>jatekGyar</AssemblyName>
