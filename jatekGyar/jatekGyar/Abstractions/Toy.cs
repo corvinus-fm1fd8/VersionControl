@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace jatekGyar.Abstractions
 {
-    abstract class Toy : Label
+    public abstract class Toy : Label
     {
         public Toy()
         {

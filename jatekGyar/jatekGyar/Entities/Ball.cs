@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace jatekGyar.Entities
 {
-    class Ball :Toy
+   public class Ball :Toy
     {
         public SolidBrush BallColor { get; private set; }
 

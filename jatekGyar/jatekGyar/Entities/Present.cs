@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace jatekGyar.Entities
 {
-    class Present : Toy
+    public class Present : Toy
     {
         public SolidBrush RibbonColor { get; private set; }
         public SolidBrush BoxColor { get; private set; }
-        public Present(Color r, Color b)
-        {
-            RibbonColor = new SolidBrush(r);
-            BoxColor = new SolidBrush(b);
-        }
+       
         protected override void DrawImage(Graphics g)
         {  
             g.FillRectangle(BoxColor, 0, 0, Width, Height);
